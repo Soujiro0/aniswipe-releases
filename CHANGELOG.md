@@ -2,6 +2,11 @@
 
 All notable changes to the AniSwipe project will be documented in this file.
 
+### v1.1.1 - June 10, 2026
+* **Improved** Faster Load Times: Migrated poster images to highly optimized WebP format for snappier browsing.
+* **Added** Library Search & Sorting: Added a quick inline search bar to instantly filter your lists, plus new Score sorting options.
+* **Added** Desktop List View: You can now toggle your library between a grid of posters or a spacious new list layout.
+
 ### v1.1.0 - June 7, 2026
 * **New** Swipe Deck Toggles: Switch your discovery deck between Top Rated, Currently Airing, and Upcoming anime!
 * **New** Trailer Support: Added a play button to swipe cards and detail pages so you can watch YouTube trailers without leaving the app.
