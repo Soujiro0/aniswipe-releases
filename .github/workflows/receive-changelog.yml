@@ -1,0 +1,31 @@
+name: Receive & Update Changelog
+
+on:
+  repository_dispatch:
+    types: [sync-changelog] # Wakes up when aniswipe sends 'sync-changelog' event
+  workflow_dispatch: # Allows manual run to pull the latest CHANGELOG.md from aniswipe
+
+jobs:
+  update-changelog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Releases Repo
+        uses: actions/checkout@v4
+
+      - name: Download latest CHANGELOG.md from Web App
+        run: |
+          curl -sSL "https://raw.githubusercontent.com/Soujiro0/aniswipe/main/src/data/CHANGELOG.md" -o CHANGELOG.md
+
+      - name: Commit & Push Changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          if [ -n "$(git status --porcelain)" ]; then
+            git add CHANGELOG.md
+            git commit -m "docs: sync CHANGELOG.md from web app [skip ci]"
+            git push origin main
+            echo "CHANGELOG.md successfully synced and pushed!"
+          else
+            echo "CHANGELOG.md is already identical to web app repo."
+          fi
