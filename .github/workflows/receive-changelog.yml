@@ -6,7 +6,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'CHANGELOG.md' # Wakes up whenever CHANGELOG.md is pushed directly to main
+      - 'CHANGELOG.md' # Wakes up whenever CHANGELOG.md is pushed/synced to main
   workflow_dispatch: # Allows manual run anytime from Actions tab
 
 permissions:
@@ -21,11 +21,18 @@ jobs:
         with:
           fetch-depth: 0 # Fetch all tags and history
 
-      - name: Download latest CHANGELOG.md from Web App
+      - name: Download latest CHANGELOG.md from Web App (if accessible)
         run: |
-          curl -sSL "https://raw.githubusercontent.com/Soujiro0/aniswipe/main/src/data/CHANGELOG.md" -o CHANGELOG.md
+          HTTP_CODE=$(curl -sSL -o temp_changelog.md -w "%{http_code}" -H "Authorization: token ${{ secrets.WEB_APP_PAT || secrets.RELEASES_REPO_PAT || '' }}" "https://raw.githubusercontent.com/Soujiro0/aniswipe/main/src/data/CHANGELOG.md")
+          if [ "$HTTP_CODE" = "200" ]; then
+            mv temp_changelog.md CHANGELOG.md
+            echo "Downloaded fresh CHANGELOG.md via curl!"
+          else
+            echo "Note: Could not download via curl (HTTP $HTTP_CODE - private repository or no token). Using local CHANGELOG.md pushed directly by web app repo."
+            rm -f temp_changelog.md
+          fi
 
-      - name: Commit & Push CHANGELOG.md (if modified)
+      - name: Commit & Push CHANGELOG.md (if modified via curl)
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -36,7 +43,7 @@ jobs:
             git push origin main
             echo "CHANGELOG.md successfully synced and pushed!"
           else
-            echo "CHANGELOG.md is already identical to web app repo."
+            echo "CHANGELOG.md is already up to date."
           fi
 
       - name: Extract Latest Version & Check Tag
@@ -45,6 +52,11 @@ jobs:
           # Extract the top version heading from CHANGELOG.md (e.g. "v1.2.0" or "1.2.0")
           RAW_VERSION=$(grep -m 1 '^### ' CHANGELOG.md | sed -E 's/^###[[:space:]]*(v?[0-9]+\.[0-9]+\.[0-9]+).*/\1/')
           echo "Found raw version in CHANGELOG.md: $RAW_VERSION"
+          
+          if [ -z "$RAW_VERSION" ]; then
+            echo "::error::No version header found in CHANGELOG.md! Check file content."
+            exit 1
+          fi
           
           # Ensure tag starts with 'v' to match aniswipe-releases convention (e.g. v1.2.0)
           if [[ "$RAW_VERSION" != v* ]]; then
@@ -87,5 +99,5 @@ jobs:
           git push origin "$TAG_NAME"
           
           # Create GitHub Release using GitHub CLI
-          gh release create "$TAG_NAME" -F release_notes.md --title "$TAG_NAME (AniSwipe Release)"
+          gh release create "$TAG_NAME" -F release_notes.md --title "$TAG_NAME"
           echo "Successfully created GitHub Release $TAG_NAME!"
