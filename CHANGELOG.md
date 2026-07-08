@@ -2,16 +2,6 @@
 
 All notable changes to the AniSwipe project will be documented in this file.
 
-### v1.2.1 - July 9, 2026
-
-- **Fixed** Sync & Release Workflow: Updated the workflow to correctly handle 404 errors from private repositories and implemented robust token verification to ensure smooth changelog synchronization and release creation.
-
-### v1.2.0 - July 9, 2026
-
-- **Improved** Crisp & Clear Backgrounds: Removed heavy backdrop blur and dark side-vignettes across the home, login, and register screens so background anime artwork and grid collages look bright and vibrant.
-- **Improved** Ultra-Fast Browsing & Memory: Optimized all anime cards and sliders with React memoization, lazy loading, and asynchronous decoding for buttery-smooth scrolling.
-- **Fixed** Smart Tracker & Sorting: Automatically marks an anime as Completed when watched episodes equal total episodes, and keeps completed shows with no user score at the bottom of the watchlist.
-
 ### v1.1.1 - June 10, 2026
 
 - **Improved** Faster Load Times: Migrated poster images to highly optimized WebP format for snappier browsing.
