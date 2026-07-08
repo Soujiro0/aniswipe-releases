@@ -1,30 +1,30 @@
-# Changelog
+# What's New
+Latest updates and improvements to AniSwipe
 
-All notable changes to the AniSwipe project will be documented in this file.
+### v1.2.0 - July 9, 2026
+* **Improved** Crisp & Clear Backgrounds: Removed heavy backdrop blur and dark side-vignettes across the home, login, and register screens so background anime artwork and grid collages look bright and vibrant.
+* **Improved** Ultra-Fast Browsing & Memory: Optimized all anime cards and sliders with React memoization, lazy loading, and asynchronous decoding for buttery-smooth scrolling.
+* **Fixed** Smart Tracker & Sorting: Automatically marks an anime as Completed when watched episodes equal total episodes, and keeps completed shows with no user score at the bottom of the watchlist.
 
 ### v1.1.1 - June 10, 2026
-
-- **Improved** Faster Load Times: Migrated poster images to highly optimized WebP format for snappier browsing.
-- **Added** Library Search & Sorting: Added a quick inline search bar to instantly filter your lists, plus new Score sorting options.
-- **Added** Desktop List View: You can now toggle your library between a grid of posters or a spacious new list layout.
+* **Improved** Faster Load Times: Migrated poster images to highly optimized WebP format for snappier browsing.
+* **Added** Library Search & Sorting: Added a quick inline search bar to instantly filter your lists, plus new Score sorting options.
+* **Added** Desktop List View: You can now toggle your library between a grid of posters or a spacious new list layout.
 
 ### v1.1.0 - June 7, 2026
-
-- **New** Swipe Deck Toggles: Switch your discovery deck between Top Rated, Currently Airing, and Upcoming anime!
-- **New** Trailer Support: Added a play button to swipe cards and detail pages so you can watch YouTube trailers without leaving the app.
-- **Added** Undo Swipe: Accidentally skipped a show? Use the new Undo button to bring back your last swiped card.
-- **Improved** Live Release Timers: Calendar cards now show a live countdown (e.g. ⏳ 2h 15m) until an episode airs, replacing the old "Up Next" badge.
-- **Improved** Smart Calendar Scrolling: The Release Calendar now automatically scrolls to the current time slot when you open it.
+* **New** Swipe Deck Toggles: Switch your discovery deck between Top Rated, Currently Airing, and Upcoming anime!
+* **New** Trailer Support: Added a play button to swipe cards and detail pages so you can watch YouTube trailers without leaving the app.
+* **Added** Undo Swipe: Accidentally skipped a show? Use the new Undo button to bring back your last swiped card.
+* **Improved** Live Release Timers: Calendar cards now show a live countdown (e.g. ⏳ 2h 15m) until an episode airs, replacing the old "Up Next" badge.
+* **Improved** Smart Calendar Scrolling: The Release Calendar now automatically scrolls to the current time slot when you open it.
 
 ### v1.0.1 - May 19, 2026
-
-- **Sync Bug:** Fixed an issue where updating your episodes watched or anime status wouldn't correctly save to MyAnimeList.
-- **Stay Logged In:** Resolved an issue where background token refreshes were failing, preventing unexpected logouts and keeping your session secure.
-- **Smoother Loading:** Fixed a gateway connection error that was occasionally preventing users' anime lists from fetching properly on the first load.
+* **Sync Bug:** Fixed an issue where updating your episodes watched or anime status wouldn't correctly save to MyAnimeList.
+* **Stay Logged In:** Resolved an issue where background token refreshes were failing, preventing unexpected logouts and keeping your session secure.
+* **Smoother Loading:** Fixed a gateway connection error that was occasionally preventing users' anime lists from fetching properly on the first load.
 
 ### v1.0.0 - May 18, 2026
-
-- **Initial Release** AniSwipe goes live!
-- **Added** Swipe-to-discover anime feature.
-- **Added** Full MyAnimeList proxy integration for seamless watchlist sync.
-- **Added** Cross-platform mobile-responsive layouts.
+* **Initial Release** AniSwipe goes live!
+* **Added** Swipe-to-discover anime feature.
+* **Added** Full MyAnimeList proxy integration for seamless watchlist sync.
+* **Added** Cross-platform mobile-responsive layouts.
