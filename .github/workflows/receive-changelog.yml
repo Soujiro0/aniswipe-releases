@@ -86,6 +86,16 @@ jobs:
           echo "Extracted Release Notes:"
           cat release_notes.md
 
+      - name: Download APK from Main Repo
+        if: steps.check_version.outputs.tag_exists == 'false' && github.event.client_payload.run_id != ''
+        env:
+          GH_TOKEN: ${{ secrets.WEB_APP_PAT || secrets.RELEASES_REPO_PAT || secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Downloading APK artifact from run ${{ github.event.client_payload.run_id }}..."
+          gh run download ${{ github.event.client_payload.run_id }} -n aniswipe-apk -R Soujiro0/aniswipe
+          echo "Downloaded files:"
+          ls -la
+
       - name: Create Git Tag & GitHub Release
         if: steps.check_version.outputs.tag_exists == 'false'
         env:
@@ -98,6 +108,15 @@ jobs:
           git tag "$TAG_NAME"
           git push origin "$TAG_NAME"
           
-          # Create GitHub Release using GitHub CLI
-          gh release create "$TAG_NAME" -F release_notes.md --title "$TAG_NAME"
+          # Find APK if it was downloaded
+          APK_FILE=$(find . -maxdepth 1 -name "*.apk" | head -n 1)
+          
+          if [ -n "$APK_FILE" ]; then
+            echo "Creating GitHub Release $TAG_NAME with APK $APK_FILE..."
+            gh release create "$TAG_NAME" "$APK_FILE" -F release_notes.md --title "$TAG_NAME"
+          else
+            echo "Creating GitHub Release $TAG_NAME without APK..."
+            gh release create "$TAG_NAME" -F release_notes.md --title "$TAG_NAME"
+          fi
+          
           echo "Successfully created GitHub Release $TAG_NAME!"
