@@ -2,7 +2,13 @@
 
 Latest updates and improvements to AniSwipe
 
-### v2.0.0 - August 8, 2026
+### Future updates to be developed
+
+- **Community Discussion:** Engage with other fans, discuss episodes, and share your thoughts on the latest releases.
+- **Anime Review:** Write and read comprehensive reviews to help others discover great anime.
+- **Notes:** Keep private notes on your watchlist items or specific episodes.
+
+### v2.0.0 - August 8, 2026 - Latest
 
 - **New** Native Mobile App: AniSwipe is now fully optimized for mobile devices! Enjoy a true app experience with a dedicated bottom navigation bar, seamless background updates, and maximized screen space.
 - **Overhauled** App Design: We've completely revamped the entire app for a sleeker, more premium look with beautiful typography, softer edges, and better readability on all screens.
